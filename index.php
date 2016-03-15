@@ -17,6 +17,7 @@ $get = get();
 					<th>#</th>
 					<th>Eesnimi</th>
 					<th>Perenimi</th>
+					<th>Muudetud</th>
 					<th>Valikud</th>
 				</tr>
             </thead>
@@ -25,7 +26,7 @@ $get = get();
 				if ($get->num_rows > 0) {
 					// output data of each row
 					while($row = $get->fetch_assoc()) {
-						echo "<tr><td>".$row["id"]."</td><td>".$row["eesnimi"]."</td><td>".$row["perenimi"]."</td><td>
+						echo "<tr><td>".$row["id"]."</td><td>".$row["eesnimi"]."</td><td>".$row["perenimi"]."</td><td>".$row["aeg"]."</td><td>
 						<button type='submit' name='mybutton' value='".$row["id"]."' class='btn btn-xs btn-success'>Vaata</button></td></tr>";
 					}
 				} else {

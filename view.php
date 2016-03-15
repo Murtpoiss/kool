@@ -27,7 +27,7 @@ if(isset($_POST['mybutton1']))
             </thead>
             <tbody>
 			<?php
-				echo "<tr><td>".$getone["id"]."</td><td>".$getone["eesnimi"]."</td><td>".$getone["perenimi"]."</td><td>".$getone["email"]."</td><td>".$getone["pilt"]."</td><td>";
+				echo "<tr><td>".$getone["id"]."</td><td>".$getone["eesnimi"]."</td><td>".$getone["perenimi"]."</td><td>".$getone["email"]."</td><td>".$getone["pilt"]."</td><td>".$getone["aeg"]."</td><td>";
 			?>
 				<form action="change.php" method="post">
 				<input type="hidden" name="mybutton" value="<?php echo $getone["id"]; ?>">
