@@ -24,12 +24,13 @@ if(isset($_POST['mybutton1']))
 					<th>Tel</th>
 					<th>Sugu</th>
 					<th>Pilt</th>
+					<th>Muudetud</th>
 					<th>Valikud</th>
 				</tr>
             </thead>
             <tbody>
 			<?php
-				echo "<tr><td>".$getone["id"]."</td><td>".$getone["name"]."</td><td>".$getone["username"]."</td><td>".$getone["email"]."</td><td>".$getone["userimg"]."</td><td>".$getone["regdate"]."</td><td>";
+				echo "<tr><td>".$getone["id"]."</td><td>".$getone["name"]."</td><td>".$getone["username"]."</td><td>".$getone["email"]."</td><td>".$getone["usertel"]."</td><td>".$getone["gender"]."</td><td>".$getone["userimg"]."</td><td>".$getone["regdate"]."</td><td>";
 			?>
 				<form action="change.php" method="post">
 				<input type="hidden" name="mybutton" value="<?php echo $getone["id"]; ?>">

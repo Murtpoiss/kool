@@ -23,7 +23,7 @@ function addUser() {
 	$gender = mysqli_real_escape_string($connection, $_POST['gender']);
 	move_uploaded_file( $_FILES['userimg']['tmp_name'], $todir . basename($_FILES['userimg']['name'] ) );
 
-	$sql = "INSERT INTO user (name, username, email, usertel, gender, userimg, regdate)
+	$sql = "INSERT INTO users (name, username, email, usertel, gender, userimg, regdate)
 	VALUES ('".$name."', '".$username."', '".$email."', '".$usertel."', '".$gender."', '".$_FILES['userimg']['name']."', '".$time."')";
 
 	$connection->query($sql);
@@ -34,7 +34,7 @@ function addUser() {
 
 //get all
 function getUserList() {
-	$sql = "SELECT * FROM user";
+	$sql = "SELECT * FROM users";
 	global $connection;
 	$result = $connection->query($sql);
 	return $result;
@@ -44,7 +44,7 @@ function getUserList() {
 function getUserData() {
 	global $connection;
 	$id = mysqli_real_escape_string($connection, $_POST['mybutton']);
-	$sql = "SELECT * FROM user WHERE id=".$id."";
+	$sql = "SELECT * FROM users WHERE id=".$id."";
 	$result = $connection->query($sql);
 	$oneuser = $result->fetch_assoc();
 	return $oneuser;
@@ -54,11 +54,11 @@ function getUserData() {
 function delUser() {
 	global $connection, $todir;
 	$id = mysqli_real_escape_string($connection, $_POST['mybutton1']);
-	$sql = "SELECT * FROM user WHERE id=".$id."";
+	$sql = "SELECT * FROM users WHERE id=".$id."";
 	$result = $connection->query($sql);
 	$oneuser = $result->fetch_assoc();
 	if($oneuser['userimg']){unlink ($todir.$oneuser['userimg']);}
-	$sql = "DELETE FROM user WHERE id=".$id."";
+	$sql = "DELETE FROM users WHERE id=".$id."";
 	global $connection;
 	$connection->query($sql);
 	header("Location: index.php");
@@ -80,7 +80,7 @@ function updUser() {
 		unlink ($todir.$oneuser['userimg']);
 	}
 	move_uploaded_file( $_FILES['userimg']['tmp_name'], $todir . basename($_FILES['userimg']['name'] ) );
-	$sql = "UPDATE user SET name='".$name."', username='".$username."', email='".$email."', gender='".$gender."', usertel='".$usertel."', userimg='".$_FILES['userimg']['name']."', regdate='".$time."' WHERE id=".$id."";
+	$sql = "UPDATE users SET name='".$name."', username='".$username."', email='".$email."', gender='".$gender."', usertel='".$usertel."', userimg='".$_FILES['userimg']['name']."', regdate='".$time."' WHERE id=".$id."";
 	$connection->query($sql);
 }else{
 	global $connection, $time;
@@ -90,7 +90,7 @@ function updUser() {
 	$email = mysqli_real_escape_string($connection, $_POST['email']);
 	$usertel = mysqli_real_escape_string($connection, $_POST['usertel']);
 	$gender = mysqli_real_escape_string($connection, $_POST['gender']);
-	$sql = "UPDATE user SET name='".$name."', username='".$username."', gender='".$gender."', usertel='".$usertel."', email='".$email."', regdate='".$time."' WHERE id=".$id."";
+	$sql = "UPDATE users SET name='".$name."', username='".$username."', gender='".$gender."', usertel='".$usertel."', email='".$email."', regdate='".$time."' WHERE id=".$id."";
 	$connection->query($sql);
 }
 

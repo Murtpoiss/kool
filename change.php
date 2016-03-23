@@ -42,8 +42,8 @@ if(isset($_POST['mybutton2']))
   <div class="form-group">
     <label class="control-label col-sm-2" for="gender">Sugu:</label>
     <div class="col-sm-10">
-		<input type="radio" name="gender" id="Mees" value="Mees" checked="<?php if($getone["gender"]="Mees"){echo "checked"}; ?>"> Mees<br>
-		<input type="radio" name="gender" id="Naine" value="Naine" checked="<?php if($getone["gender"]="Naine"){echo "checked"}; ?>"> Naine
+		<input type="radio" name="gender" id="Mees" value="Mees" checked="<?php if($getone["gender"]="Mees"){echo "checked";}; ?>"> Mees<br>
+		<input type="radio" name="gender" id="Naine" value="Naine" checked="<?php if($getone["gender"]="Naine"){echo "checked";}; ?>"> Naine
     </div>
   </div>
   <div class="form-group">
