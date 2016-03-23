@@ -2,9 +2,9 @@
 <?php
 if(isset($_POST['mybutton1']))
 {
-    del();
+    delUser();
 }else{
-	$getone = getone();
+	$getone = getUserData();
 }
 ?>
 <?php include 'header.php';?>
@@ -18,16 +18,18 @@ if(isset($_POST['mybutton1']))
             <thead>
 				<tr>
 					<th>#</th>
-					<th>Eesnimi</th>
-					<th>Perenimi</th>
+					<th>Nimi</th>
+					<th>Kasutaja</th>
 					<th>E-mail</th>
+					<th>Tel</th>
+					<th>Sugu</th>
 					<th>Pilt</th>
 					<th>Valikud</th>
 				</tr>
             </thead>
             <tbody>
 			<?php
-				echo "<tr><td>".$getone["id"]."</td><td>".$getone["eesnimi"]."</td><td>".$getone["perenimi"]."</td><td>".$getone["email"]."</td><td>".$getone["pilt"]."</td><td>".$getone["aeg"]."</td><td>";
+				echo "<tr><td>".$getone["id"]."</td><td>".$getone["name"]."</td><td>".$getone["username"]."</td><td>".$getone["email"]."</td><td>".$getone["userimg"]."</td><td>".$getone["regdate"]."</td><td>";
 			?>
 				<form action="change.php" method="post">
 				<input type="hidden" name="mybutton" value="<?php echo $getone["id"]; ?>">
@@ -42,8 +44,8 @@ if(isset($_POST['mybutton1']))
     </div>
 </div>
 <?php
-if($getone['pilt']){?>
-<img src="<?php echo "pilt/".$getone["pilt"]; ?>" class="img-rounded" alt="<?php echo $getone["pilt"]; ?>" width="auto" height="300">
+if($getone['userimg']){?>
+<img src="<?php echo "pilt/".$getone["userimg"]; ?>" class="img-rounded" alt="<?php echo $getone["userimg"]; ?>" width="auto" height="300">
 <?php }
 ?>
 <?php include 'footer.php'; ?>

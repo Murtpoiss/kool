@@ -2,7 +2,7 @@
 <?php
 if(isset($_POST['mybutton3']))
 {
-    addnew();
+    addUser();
 }
 ?>
 <?php include 'header.php';?>
@@ -13,15 +13,15 @@ if(isset($_POST['mybutton3']))
 
 <form class="form-horizontal pool" role="form" method="post" enctype="multipart/form-data">
 <div class="form-group">
-    <label class="control-label col-sm-2" for="enimi">Eesnimi:</label>
+    <label class="control-label col-sm-2" for="name">Nimi:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="enimi" placeholder="Martin">
+      <input type="text" class="form-control" name="name" placeholder="Martin">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="pnimi">Perenimi:</label>
+    <label class="control-label col-sm-2" for="username">Kasutaja:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="pnimi" placeholder="Rand">
+      <input type="text" class="form-control" name="username" placeholder="Rand">
     </div>
   </div>
   <div class="form-group">
@@ -31,9 +31,22 @@ if(isset($_POST['mybutton3']))
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="pilt">Image:</label>
+    <label class="control-label col-sm-2" for="usertel">Tel:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="usertel" placeholder="53975474">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="gender">Sugu:</label>
+    <div class="col-sm-10">
+		<input type="radio" name="gender" id="Mees" value="Mees" checked="checked"> Mees<br>
+		<input type="radio" name="gender" id="Naine" value="Naine"> Naine
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="userimg">Pilt:</label>
     <div class="col-sm-10"> 
-      <input type="file" class="form-control" name="pilt" placeholder="Mina.jpg">
+      <input type="file" class="form-control" name="userimg" placeholder="Mina.jpg">
     </div>
   </div>
   <div class="form-group"> 

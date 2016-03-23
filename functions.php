@@ -5,92 +5,98 @@ $time = date("Y-m-d H:i:s");
 $todir = "pilt/";
 
 	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
+	$connection = new mysqli($servername, $username, $password, $dbname);
 	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
+	if ($connection->connect_error) {
+		die("Connection failed: " . $connection->connect_error);
 	}
-	return $conn;
+	return $connection;
 
 
 //add new
-function addnew() {
-	global $conn, $time, $todir;
-	$enimi = mysqli_real_escape_string($conn, $_POST['enimi']);
-	$pnimi = mysqli_real_escape_string($conn, $_POST['pnimi']);
-	$email = mysqli_real_escape_string($conn, $_POST['email']);
-	move_uploaded_file( $_FILES['pilt']['tmp_name'], $todir . basename($_FILES['pilt']['name'] ) );
+function addUser() {
+	global $connection, $time, $todir;
+	$name = mysqli_real_escape_string($connection, $_POST['name']);
+	$username = mysqli_real_escape_string($connection, $_POST['username']);
+	$email = mysqli_real_escape_string($connection, $_POST['email']);
+	$usertel = mysqli_real_escape_string($connection, $_POST['usertel']);
+	$gender = mysqli_real_escape_string($connection, $_POST['gender']);
+	move_uploaded_file( $_FILES['userimg']['tmp_name'], $todir . basename($_FILES['userimg']['name'] ) );
 
-	$sql = "INSERT INTO user (eesnimi, perenimi, email, pilt, aeg)
-	VALUES ('".$enimi."', '".$pnimi."', '".$email."', '".$_FILES['pilt']['name']."', '".$time."')";
+	$sql = "INSERT INTO user (name, username, email, usertel, gender, userimg, regdate)
+	VALUES ('".$name."', '".$username."', '".$email."', '".$usertel."', '".$gender."', '".$_FILES['userimg']['name']."', '".$time."')";
 
-	$conn->query($sql);
+	$connection->query($sql);
 
 	header("Location: index.php");
 	die();
 }
 
 //get all
-function get() {
+function getUserList() {
 	$sql = "SELECT * FROM user";
-	global $conn;
-	$result = $conn->query($sql);
+	global $connection;
+	$result = $connection->query($sql);
 	return $result;
 }
 
 //get one
-function getone() {
-	global $conn;
-	$id = mysqli_real_escape_string($conn, $_POST['mybutton']);
+function getUserData() {
+	global $connection;
+	$id = mysqli_real_escape_string($connection, $_POST['mybutton']);
 	$sql = "SELECT * FROM user WHERE id=".$id."";
-	$result = $conn->query($sql);
+	$result = $connection->query($sql);
 	$oneuser = $result->fetch_assoc();
 	return $oneuser;
 }
 
 //del one
-function del() {
-	global $conn, $todir;
-	$id = mysqli_real_escape_string($conn, $_POST['mybutton1']);
+function delUser() {
+	global $connection, $todir;
+	$id = mysqli_real_escape_string($connection, $_POST['mybutton1']);
 	$sql = "SELECT * FROM user WHERE id=".$id."";
-	$result = $conn->query($sql);
+	$result = $connection->query($sql);
 	$oneuser = $result->fetch_assoc();
-	if($oneuser['pilt']){unlink ($todir.$oneuser['pilt']);}
+	if($oneuser['userimg']){unlink ($todir.$oneuser['userimg']);}
 	$sql = "DELETE FROM user WHERE id=".$id."";
-	global $conn;
-	$conn->query($sql);
+	global $connection;
+	$connection->query($sql);
 	header("Location: index.php");
 	die();
 }
 
 //update exicting
-function update() {
-	if ( !!$_FILES['pilt']['tmp_name'] ){ // is the file uploaded yet?
-	global $todir, $time, $conn;
-	$id = mysqli_real_escape_string($conn, $_POST['hidden']);
-	$enimi = mysqli_real_escape_string($conn, $_POST['enimi']);
-	$pnimi = mysqli_real_escape_string($conn, $_POST['pnimi']);
-	$email = mysqli_real_escape_string($conn, $_POST['email']);
-	if($oneuser['pilt']){
+function updUser() {
+	if ( !!$_FILES['userimg']['tmp_name'] ){ // is the file uploaded yet?
+	global $todir, $time, $connection;
+	$id = mysqli_real_escape_string($connection, $_POST['hidden']);
+	$name = mysqli_real_escape_string($connection, $_POST['name']);
+	$username = mysqli_real_escape_string($connection, $_POST['username']);
+	$email = mysqli_real_escape_string($connection, $_POST['email']);
+	$usertel = mysqli_real_escape_string($connection, $_POST['usertel']);
+	$gender = mysqli_real_escape_string($connection, $_POST['gender']);
+	if($oneuser['userimg']){
 		getone();
-		unlink ($todir.$oneuser['pilt']);
+		unlink ($todir.$oneuser['userimg']);
 	}
-	move_uploaded_file( $_FILES['pilt']['tmp_name'], $todir . basename($_FILES['pilt']['name'] ) );
-	$sql = "UPDATE user SET eesnimi='".$enimi."', perenimi='".$pnimi."', email='".$email."', pilt='".$_FILES['pilt']['name']."', aeg='".$time."' WHERE id=".$id."";
-	$conn->query($sql);
+	move_uploaded_file( $_FILES['userimg']['tmp_name'], $todir . basename($_FILES['userimg']['name'] ) );
+	$sql = "UPDATE user SET name='".$name."', username='".$username."', email='".$email."', gender='".$gender."', usertel='".$usertel."', userimg='".$_FILES['userimg']['name']."', regdate='".$time."' WHERE id=".$id."";
+	$connection->query($sql);
 }else{
-	global $conn, $time;
-	$id = mysqli_real_escape_string($conn, $_POST['hidden']);
-	$enimi = mysqli_real_escape_string($conn, $_POST['enimi']);
-	$pnimi = mysqli_real_escape_string($conn, $_POST['pnimi']);
-	$email = mysqli_real_escape_string($conn, $_POST['email']);
-	$sql = "UPDATE user SET eesnimi='".$enimi."', perenimi='".$pnimi."', email='".$email."', aeg='".$time."' WHERE id=".$id."";
-	$conn->query($sql);
+	global $connection, $time;
+	$id = mysqli_real_escape_string($connection, $_POST['hidden']);
+	$name = mysqli_real_escape_string($connection, $_POST['name']);
+	$username = mysqli_real_escape_string($connection, $_POST['username']);
+	$email = mysqli_real_escape_string($connection, $_POST['email']);
+	$usertel = mysqli_real_escape_string($connection, $_POST['usertel']);
+	$gender = mysqli_real_escape_string($connection, $_POST['gender']);
+	$sql = "UPDATE user SET name='".$name."', username='".$username."', gender='".$gender."', usertel='".$usertel."', email='".$email."', regdate='".$time."' WHERE id=".$id."";
+	$connection->query($sql);
 }
 
 header("Location: index.php");
 die();
 }
 
-$conn->close();
+$connection->close();
 ?>
