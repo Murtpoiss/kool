@@ -2,6 +2,8 @@
 <?php include 'header.php';?>
 <?php
 $get = getUserList();
+setlocale(LC_TIME, 'Estonia');
+echo "Tänane kuupäev: ".(strftime("%Y. %B %d."));
 ?>
 <div class="page-header pool">
         <h1>Tabel</h1>
