@@ -3,14 +3,12 @@
 <?php
 $get = getUserList();
 setlocale(LC_TIME, 'Estonia');
-
-$algus = //Our dates
-$date1 = strptime('01-03-2016', '%d-%m-%Y');
-$date2 = time();
-$difference = $date2 - $date1;
-
+date_default_timezone_set('Europe/Tallinn');
+$praegu = time();
+$algus = strtotime("01-03-2016 10:00:00");
+$kulunud = $praegu-$algus;
+echo "Kursuse algusest on möödunud ".$kulunud." sekundit<br>";
 echo "Tänane kuupäev: ".(strftime("%Y. %B %d."));
-echo "Kursuse algusest on möödas: ".$difference." sek.";
 ?>
 <div class="page-header pool">
         <h1>Tabel</h1>
